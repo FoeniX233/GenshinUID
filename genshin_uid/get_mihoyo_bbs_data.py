@@ -442,7 +442,7 @@ async def daily(mode='push', uid=None):
 
             # 推送条件检查，在指令查询时 row[6] 为 0 ，而自动推送时 row[6] 为 140，这样保证用指令查询时必回复
             # 说实话我仔细看了一会才理解…
-            if current_resin >= row[6] or dailydata['max_home_coin'] - dailydata['current_home_coin'] <= 100:
+            if current_resin >= row[6] or dailydata['max_home_coin'] - dailydata['current_home_coin'] <= 100 or finished_expedition_num == current_expedition_num or dailydata['transformer']['recovery_time']['reached']:
                 tip = ''
                 tips = []
                 if current_resin >= row[6] != 0:
@@ -451,6 +451,8 @@ async def daily(mode='push', uid=None):
                     tips.append('你的洞天宝钱快满了！')
                 if finished_expedition_num == current_expedition_num:
                     tips.append('你的所有探索派遣完成了！')  # emmmm
+                if dailydata['transformer']['recovery_time']['reached']:
+                    tips.append('你的参量质变仪已就绪！')
                 if tips:
                     tips.insert(0, '\n==============')
                     tip = '\n'.join(tips)
