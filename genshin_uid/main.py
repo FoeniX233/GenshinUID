@@ -57,9 +57,9 @@ link_mys = on_command('绑定mys', priority=priority)
 link_uid = on_command('绑定uid', priority=priority)
 
 monthly_data = on_command('每月统计', priority=priority)
-daily_data = on_command('当前状态', priority=priority)
+daily_data = on_command('原神便笺', priority=priority)
 
-get_genshin_info = on_command('当前信息', priority=priority)
+get_genshin_info = on_command('便笺图片', priority=priority)
 
 add_cookie = on_command('添加', permission=PRIVATE_FRIEND, priority=priority)
 
@@ -183,8 +183,8 @@ async def push():
         pass
 
 
-# 每日零点半进行米游社签到
-@scheduler.scheduled_job('cron', hour='0', minute='30')
+# 每日八点进行米游社签到
+@scheduler.scheduled_job('cron', hour='8', minute='0')
 async def sign_at_night():
     await daily_sign()
 
